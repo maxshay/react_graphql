@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useLoginMutation } from '../generated/graphql'
 import { InputField } from '../components/InputField'
 import { Wrapper } from '../components/Wrapper'
@@ -7,12 +7,12 @@ import React from 'react'
 import { toErrorMap } from '../utils/newErrorMap'
 import { useRouter } from 'next/router'
 
-interface loginProps {
+interface LoginProps {
 
 }
 
 
-export const Login: React.FC<loginProps> = ({}) => {
+export const Login: React.FC<LoginProps> = ({}) => {
     const [,login] = useLoginMutation()
     const router = useRouter()
      
