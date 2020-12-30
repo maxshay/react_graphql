@@ -34,10 +34,14 @@ const main = async () => {
         credentials: true
     }))
 
+    if (process.env.SESSION_SECRET === undefined) {
+        throw new Error('environment variables not configured.')
+    }
+
     app.use(
         session({
-            name: 'qid',
-            secret: 'jafndh4.34ihfc8e9U89he*HF#L',
+            name: process.env.SESSION_NAME,
+            secret: process.env.SESSION_SECRET,
             resave: false,
             cookie: {
                 maxAge: 1000*60*60*24*365, // 1 year
