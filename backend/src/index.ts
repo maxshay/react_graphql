@@ -10,8 +10,7 @@ import express from 'express'
 import Redis from 'ioredis'
 import { MyContext } from './types'
 import cors from 'cors'
-
-require('dotenv').config({path: __dirname+'/.env'})
+import config from './config'
 
 declare module 'express-session' {
     export interface SessionData {
@@ -30,24 +29,21 @@ const main = async () => {
 
     const app = express()
     app.use(cors({
-        origin: process.env.CORS_ALLOW_POLICY,
+        origin: config.corsPolicy,
         credentials: true
     }))
 
-    if (process.env.SESSION_SECRET === undefined) {
-        throw new Error('environment variables not configured.')
-    }
 
     app.use(
         session({
-            name: process.env.SESSION_NAME,
-            secret: process.env.SESSION_SECRET,
+            name: config.sessionName,
+            secret: config.sessionSecret!,
             resave: false,
             cookie: {
                 maxAge: 1000*60*60*24*365, // 1 year
                 httpOnly: true,
                 sameSite: 'lax',
-                secure: process.env.NODE_ENV !== 'development'
+                secure: config.nodeEnv !== 'development'
             },
             saveUninitialized: false,
             store

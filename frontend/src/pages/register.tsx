@@ -6,6 +6,8 @@ import { Wrapper } from '../components/Wrapper'
 import { useRouter } from 'next/router'
 import { Formik, Form } from 'formik'
 import React from 'react'
+import { withUrqlClient } from 'next-urql'
+import { createUrqlClient } from '../utils/createUrqlClient'
 
 interface RegisterProps {
 
@@ -45,4 +47,4 @@ export const Register: React.FC<RegisterProps> = ({}) => {
     )
 }
 
-export default Register
+export default withUrqlClient(createUrqlClient)(Register)

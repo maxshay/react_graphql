@@ -6,6 +6,8 @@ import { Formik, Form } from 'formik'
 import React from 'react'
 import { toErrorMap } from '../utils/newErrorMap'
 import { useRouter } from 'next/router'
+import { withUrqlClient } from 'next-urql'
+import { createUrqlClient } from '../utils/createUrqlClient'
 
 interface LoginProps {
 
@@ -45,4 +47,4 @@ export const Login: React.FC<LoginProps> = ({}) => {
     )
 }
 
-export default Login
+export default withUrqlClient(createUrqlClient)(Login)
